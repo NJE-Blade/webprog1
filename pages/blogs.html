@@ -44,19 +44,59 @@
         </nav>
 
     <!-- ── blog_intro ─────────────────────────────────────────────── -->
-    <section id="blog_head" class=" bg-black bg-opacity-75">
-        <div class="container-xxl my-5 bg-black bg-opacity-50 border border-danger rounded-4">
-            <div class="row justify-content-start align-items-md-center">
-                <div class="col-md-5 mx-5 text-md-start">
-                    <h1>
-                        <div class="display-2">Everyday Carry</div>
-                        <div class="display-5 text-muted">"NO KNIFE NO LIFE..."</div>
-                    </h1>
-                    <!-- <h6 class="my-4 text-muted">Ezeket a dolgokat cipelem...</h6> -->
-                    <!-- <a href="#fresh_blogs" class="btn btn-danger btn-lg">Blog</a> -->
+    <section id="blog_head" class="bg-black bg-opacity-75 py-5">
+    <div class="container-xxl">
+        <div class="p-2 bg-black bg-opacity-50 border border-danger rounded-4">
+        <div class="row align-items-md-center">
+            <div class="col px-3 text-md-start text-center">
+            <h1>
+                <div class="display-2">A BLOG</div>
+                
+                <div class="display-5 text-muted">"NO KNIFE NO LIFE..."</div>
+            </h1>
+            </div>
+
+            <div class="col-md-5 text-center my-3 ms-md-auto">
+                <img class="img-fluid" src="../assets/blog_balogh.png" alt="blogger_balogh">
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="blog_head" class="bg-black bg-opacity-75">
+        <div class="container-xxl">
+            <h4 class="text-muted">Kés és egyéb eszköz bemtatók, beszámolók...</p>
+            <div class="row">
+                <div class="col-sm col-md-6 mb-1">
+                    <div class="input-group justify-content-start">
+                        <span class="input-group-text">
+                        <i class="fas bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Keresés a Blogok közt...">
+                        
+                    </div>
                 </div>
-                <div class="col-md-5 text-center d-none d-md-block my-3 ms-auto">
-                    <img class="img-fluid" src="../assets/blog_balogh.png" alt="blogger_balogh">
+                <div class="col my-1">
+                    <div class="d-flex flex-wrap gap-2 justify-content-start" role="group" aria-label="Szűrők">
+                    <input type="radio" class="btn-check" name="cat" id="Összes" checked>
+                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Összes"><span id="blog_filter">Összes</span></label>
+
+                    <input type="radio" class="btn-check" name="cat" id="Kések">
+                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Kések"><span id="blog_filter">Kések</span></label>
+                    
+                    <input type="radio" class="btn-check" name="cat" id="Felszerelés">
+                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Felszerelés"><span id="blog_filter">Felszerelés</span></label>
+                    
+                    <input type="radio" class="btn-check" name="cat" id="Beszámolók">
+                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Beszámolók"><span id="blog_filter">Beszámolók</span></label>
+                    
+                    <input type="radio" class="btn-check" name="cat" id="Tréning">
+                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Tréning"><span id="blog_filter">Tréning</span></label>
+
+                    <input type="radio" class="btn-check" name="cat" id="Közösség">
+                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Közösség"><span id="blog_filter">Közösség</span></label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,8 +104,8 @@
 
     <!-- ── BLOGOK ─────────────────────────────────────────────── -->
     <section id="fresh_blogs" class="bg-black bg-opacity-75">
-        <div class="container-lg my-5">
-            <h1><span class="text-danger">•</span> Blogok</h1>
+        <div class="container-lg my-4">
+            <h1><span class="text-danger">•</span> Bejegyzések</h1>
             <div class="row g-4 my-3">
 
                 <div class="col-md-4">
