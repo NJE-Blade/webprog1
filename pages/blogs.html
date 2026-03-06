@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaszilij-EDC</title>
+    <title>Vaszilij-EDC | Blog</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/main.css">
 </head>
-<body class="d-flex flex-column min-vh-100" data-bs-theme="dark">
+<body class="d-flex flex-column min-vh-100 bg-black" data-bs-theme="dark">
     <!-- ── NAV-menu ─────────────────────────────────────────────── -->
 
         <nav class="navbar navbar-expand-md navbar-dark bg-black pt-1 pb-1 navbar-blur border-danger border-bottom sticky-top">
@@ -26,12 +26,12 @@
 
                 <div class="collapse navbar-collapse" id="main-nav">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a href="./blogs.html" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">BLOG</a></li>
-                        <li class="nav-item"><a href="#writings" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">ÍRÁSOK</a></li>
-                        <li class="nav-item"><a href="#gallery" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">GALÉRIA</a></li>
-                        <li class="nav-item"><a href="#support" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">TÁMOGATÁS</a></li>
-                        <li class="nav-item"><a href="#shop" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">BOLT</a></li>
-                        <li class="nav-item"><a href="#messages" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">ÜZENETEK</a></li>
+                        <li class="nav-item"><a href="#blogs" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">BLOG</a></li>
+                        <li class="nav-item"><a href="./writings.html" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">ÍRÁSOK</a></li>
+                        <li class="nav-item"><a href="./gallery.html" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">GALÉRIA</a></li>
+                        <li class="nav-item"><a href="./support.html" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">TÁMOGATÁS</a></li>
+                        <li class="nav-item"><a href="./shop.html" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">BOLT</a></li>
+                        <li class="nav-item"><a href="./messages.html" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">ÜZENETEK</a></li>
                         <li class="nav-item d-md-none"><a href="https://www.facebook.com/VaszilijEdc/" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">FACEBOOK OLDALUNK</a></li>
                     </ul>
                 </div>
@@ -43,251 +43,201 @@
             </div>
         </nav>
 
-    <!-- ── blog_intro ─────────────────────────────────────────────── -->
-    <section id="blog_head" class="bg-black bg-opacity-75 py-5">
-    <div class="container-xxl">
-        <div class="p-2 bg-black bg-opacity-50 border border-danger rounded-4">
-        <div class="row align-items-md-center">
-            <div class="col px-3 text-md-start text-center">
-            <h1>
-                <div class="display-2">A BLOG</div>
-                
-                <div class="display-5 text-muted">"NO KNIFE NO LIFE..."</div>
-            </h1>
-            </div>
+    <!-- ── MAIN CONTENT ───────────────────────────────────────── -->
+    <main class="flex-grow-1">
 
-            <div class="col-md-5 text-center my-3 ms-md-auto">
-                <img class="img-fluid" src="../assets/blog_balogh.png" alt="blogger_balogh">
-            </div>
-        </div>
-        </div>
-    </div>
-    </section>
-
-    <section id="blog_head" class="bg-black bg-opacity-75">
+    <!-- ── Blog bevezető ──────────────────────────────────────── -->
+    <section id="blogs" class="bg-black bg-opacity-75 py-4">
         <div class="container-xxl">
-            <h4 class="text-muted">Kés és egyéb eszköz bemtatók, beszámolók...</p>
-            <div class="row">
-                <div class="col-sm col-md-6 mb-1">
-                    <div class="input-group justify-content-start">
-                        <span class="input-group-text">
-                        <i class="fas bi-search"></i>
-                        </span>
+            <div class="bg-black bg-opacity-50 border border-danger rounded-4">
+                <div class="row align-items-md-center">
+                    <!-- Kép: mobilon felül, desktopon jobbra -->
+                    <div class="col-md-5 text-center my-3 ms-md-auto order-1 order-md-2">
+                        <img class="img-fluid" src="../assets/blog_balogh.png" alt="blogger_balogh">
+                    </div>
+                    <!-- Szöveg: mobilon alul, desktopon balra -->
+                    <div class="col px-5 py-3  text-center order-2 order-md-1">
+                        <h1>
+                            <div class="display-4">A Blog</div>
+                            <div class="fs-5 text-muted mt-2">"NO KNIFE NO LIFE..."</div>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Szűrők ─────────────────────────────────────────────── -->
+    <section id="blog-filter-bar" class="bg-black bg-opacity-75">
+        <div class="container-xxl">
+            <h4 class="text-muted">Kés és egyéb eszköz bemutatók, beszámolók...</h4>
+            <div class="row g-2 align-items-center">
+                <div class="col-sm-12 col-md-6 mb-1">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
                         <input type="text" class="form-control" placeholder="Keresés a Blogok közt...">
-                        
                     </div>
                 </div>
-                <div class="col my-1">
-                    <div class="d-flex flex-wrap gap-2 justify-content-start" role="group" aria-label="Szűrők">
-                    <input type="radio" class="btn-check" name="cat" id="Összes" checked>
-                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Összes"><span id="blog_filter">Összes</span></label>
+                <div class="col-sm-12 col-md-6">
+                    <div class="d-flex flex-wrap gap-2 align-items-center" role="group" aria-label="Szűrők">
+                        <input type="radio" class="btn-check" name="cat" id="cat-osszes" checked>
+                        <label class="btn btn-outline-danger btn-sm text-uppercase" for="cat-osszes"><span id="blog_filter">Összes</span></label>
 
-                    <input type="radio" class="btn-check" name="cat" id="Kések">
-                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Kések"><span id="blog_filter">Kések</span></label>
-                    
-                    <input type="radio" class="btn-check" name="cat" id="Felszerelés">
-                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Felszerelés"><span id="blog_filter">Felszerelés</span></label>
-                    
-                    <input type="radio" class="btn-check" name="cat" id="Beszámolók">
-                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Beszámolók"><span id="blog_filter">Beszámolók</span></label>
-                    
-                    <input type="radio" class="btn-check" name="cat" id="Tréning">
-                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Tréning"><span id="blog_filter">Tréning</span></label>
+                        <input type="radio" class="btn-check" name="cat" id="cat-kesek">
+                        <label class="btn btn-outline-danger btn-sm text-uppercase" for="cat-kesek"><span id="blog_filter">Kések</span></label>
 
-                    <input type="radio" class="btn-check" name="cat" id="Közösség">
-                    <label class="btn btn-outline-danger btn-sm text-uppercase" for="Közösség"><span id="blog_filter">Közösség</span></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <input type="radio" class="btn-check" name="cat" id="cat-felszereles">
+                        <label class="btn btn-outline-danger btn-sm text-uppercase" for="cat-felszereles"><span id="blog_filter">Felszerelés</span></label>
 
-    <!-- ── BLOGOK ─────────────────────────────────────────────── -->
-    <section id="fresh_blogs" class="bg-black bg-opacity-75">
-        <div class="container-lg my-4">
-            <h1><span class="text-danger">•</span> Bejegyzések</h1>
-            <div class="row g-4 my-3">
+                        <input type="radio" class="btn-check" name="cat" id="cat-beszamolok">
+                        <label class="btn btn-outline-danger btn-sm text-uppercase" for="cat-beszamolok"><span id="blog_filter">Beszámolók</span></label>
 
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/giant_mouse_ace_grand_main.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>GiantMouse Ace Grand</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 18.</small>
-                        </div>
-                    </div>
-                </div>
+                        <input type="radio" class="btn-check" name="cat" id="cat-trening">
+                        <label class="btn btn-outline-danger btn-sm text-uppercase" for="cat-trening"><span id="blog_filter">Tréning</span></label>
 
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/kanetsune_kiridashi.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>Kanetsune Kiridashi- a tökéletlenség bölcsessége</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 10.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/szamurajkardok_foldjen.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>A szamurájkardok földjén...</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. jan. 30.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-4 my-3">
-            
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/giant_mouse_ace_grand_main.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>GiantMouse Ace Grand</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 18.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/kanetsune_kiridashi.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>Kanetsune Kiridashi- a tökéletlenség bölcsessége</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 10.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/szamurajkardok_foldjen.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>A szamurájkardok földjén...</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. jan. 30.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-            <div class="row g-4 my-3">
-
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/giant_mouse_ace_grand_main.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>GiantMouse Ace Grand</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 18.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/kanetsune_kiridashi.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>Kanetsune Kiridashi- a tökéletlenség bölcsessége</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 10.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="blog-card" style="background-image: url('../assets/blog_pictures/szamurajkardok_foldjen.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>A szamurájkardok földjén...</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. jan. 30.</small>
-                        </div>
+                        <input type="radio" class="btn-check" name="cat" id="cat-kozosseg">
+                        <label class="btn btn-outline-danger btn-sm text-uppercase" for="cat-kozosseg"><span id="blog_filter">Közösség</span></label>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- ── CAROUSEL ─────────────────────────────────────────────── -->
-<!-- <section id="carousel" class="py-5">
-    <div class="container-md">
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-
-            <!-- Indikátorok 
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+    <!-- ── BLOGOK LISTA ───────────────────────────────────────── -->
+    <section id="blog-posts" class="bg-black bg-opacity-75 py-4">
+        <div class="container-lg">
+            <div class="red-dash mb-3">
+                <span>Bejegyzések</span>
             </div>
 
-            <div class="carousel-inner rounded">
-
-                <!-- Dia 1 
-                <div class="carousel-item active">
-                    <div class="blog-card-carousel" style="background-image: url('../assets/blog_pictures/giant_mouse_ace_grand_main.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>GiantMouse Ace Grand</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 18.</small>
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <a href="./blog_giant_mouse.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/giant_mouse_ace_grand_main.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>GiantMouse Ace Grand</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. feb. 18.</small>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-
-                <!-- Dia 2 
-                <div class="carousel-item">
-                    <div class="blog-card-carousel" style="background-image: url('../assets/blog_pictures/kanetsune_kiridashi.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>Kanetsune Kiridashi – a tökéletlenség bölcsessége</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. feb. 10.</small>
+                <div class="col-md-4">
+                    <a href="./blog_kanetsune.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/kanetsune_kiridashi.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>Kanetsune Kiridashi- a tökéletlenség bölcsessége</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. feb. 10.</small>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-
-                <!-- Dia 3 
-                <div class="carousel-item">
-                    <div class="blog-card-carousel" style="background-image: url('../assets/blog_pictures/szamurajkardok_foldjen.jpeg');">
-                        <div class="card-content">
-                            <small class="text-danger text-uppercase fw-bold">Kések</small>
-                            <h5>A szamurájkardok földjén...</h5>
-                            <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
-                            <small class="text-muted">2025. jan. 30.</small>
+                <div class="col-md-4">
+                    <a href="./blog_szamurajkardok.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/szamurajkardok_foldjen.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>A szamurájkardok földjén...</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. jan. 30.</small>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-
             </div>
 
-            <!-- Nyilak 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bg-danger rounded opacity-75"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon bg-danger rounded opacity-75""></span>
-            </button>
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <a href="./blog_giant_mouse.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/giant_mouse_ace_grand_main.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>GiantMouse Ace Grand</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. feb. 18.</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="./blog_kanetsune.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/kanetsune_kiridashi.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>Kanetsune Kiridashi- a tökéletlenség bölcsessége</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. feb. 10.</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="./blog_szamurajkardok.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/szamurajkardok_foldjen.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>A szamurájkardok földjén...</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. jan. 30.</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <a href="./blog_giant_mouse.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/giant_mouse_ace_grand_main.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>GiantMouse Ace Grand</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. feb. 18.</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="./blog_kanetsune.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/kanetsune_kiridashi.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>Kanetsune Kiridashi- a tökéletlenség bölcsessége</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. feb. 10.</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="./blog_szamurajkardok.html" class="blog-card-link">
+                        <div class="blog-card irasa-item-blog" style="background-image: url('../assets/blog_pictures/szamurajkardok_foldjen.jpeg');">
+                            <div class="card-content">
+                                <small class="text-danger text-uppercase fw-bold">Kések</small>
+                                <h5>A szamurájkardok földjén...</h5>
+                                <p class="text-muted">Ez egy példa bejegyzés szövege, ami kicsit hosszabb...</p>
+                                <small class="text-muted">2025. jan. 30.</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</section> -->
+    </section>
 
+    </main>
+
+<!-- ── FOOTER ────────────────────────────────────────────── -->
     <footer class="border-top border-danger bg-black bg-opacity-75 text-secondary text-center py-3">
         <div class="container-xxl">
             <p class="mb-0">&copy; 2025 Vaszilij EDC. Minden jog fenntartva.
-                <!-- <div class="d-flex align-items-center gap-3"> -->
-
                 <a href="https://www.facebook.com/VaszilijEdc/" target="_blank" rel="noopener noreferrer" class="text-danger opacity-75">
                 <i class="bi bi-facebook"></i>
                 </a></p>
-
-            <!-- </div> -->
-
             <div><a href="./blades_intro.html"><img src="../assets/blades_logo.svg" alt="teeth" width="36px"></a> Blades | Web developement Team's demo</div>
         </div>
     </footer>
