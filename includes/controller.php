@@ -1,14 +1,17 @@
 <?php
 
 include_once("config.php");
-include_once("db.php");
 
 class Controller {
     private $urlParts;
+    private $model;
     
 	//konstruktor
     public function __construct() {
         $this->urlParts = $this->parseSiteNames();
+
+        require_once("model.php");
+        $this->model = new Model();
     }
 
 	//szép url vizsgálata
@@ -43,4 +46,9 @@ class Controller {
     public function isLoggedIn() {
         
     }
+
+    public function getPublicMenu() {
+        return $this->model->getPublicMenu();
+    }
+
 }
