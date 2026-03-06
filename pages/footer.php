@@ -1,22 +1,24 @@
-<footer class="bg-dark text-light py-4 mt-5">
-    <div class="container">
+<footer class="border-top border-danger bg-black bg-opacity-75 text-center text-secondary py-3">
+    <div class="container-xxl">
         <div class="row">
-            <div class="col-md-6">
-                <p>Egyetemi projekt - Web-programozás 1.</p>
+            <div class="col-2">
             </div>
-            <div class="col-md-6 text-md-end">
-                <ul class="list-unstyled">
-                    <li><a href="<?= BASE_URL ?>bejelentkezes" class="text-secondary text-decoration-none">Belépés</a></li>
-                </ul>
+            <div class="col-8">
+                <p class="mb-0">&copy; 2026 Vaszilij EDC. Minden jog fenntartva.
+                    <a href="https://www.facebook.com/VaszilijEdc/" target="_blank" rel="noopener noreferrer" class="text-danger opacity-75">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                </p>
+                <div>
+                    <a href="<?php echo BASE_URL; ?>pages/blades_intro.html"><img src="<?php echo BASE_URL; ?>/assets/blades_logo.svg" alt="teeth" width="36px"></a>
+                    Blades | Web developement Team's demo
+                </div>
             </div>
-        </div>
-        <div class="text-center">
-            <small>&copy; 2026 Copyright izé.</small>
+            <div class="col-2">
+                <a href="<?php echo BASE_URL; ?>belepes" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0">
+                    Belépés
+                </a>
+            </div>
         </div>
     </div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
-</body>
-</html>
