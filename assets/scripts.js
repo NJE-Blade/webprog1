@@ -29,3 +29,24 @@ document.addEventListener('DOMContentLoaded', function() { //ez a rész arra kel
         deleteModal.hide();
     });
 });
+
+
+//kép nagyításhoz a script
+document.addEventListener('DOMContentLoaded', function() {
+    const zoomImages = document.querySelectorAll('.zoom-img');
+    const imageModalEl = document.getElementById('imageModal');
+    
+    if (imageModalEl) {
+        const fullImage = document.getElementById('fullImage');
+        const caption = document.getElementById('imageCaption');
+        const imageModal = new bootstrap.Modal(imageModalEl);
+
+        zoomImages.forEach(img => {
+            img.addEventListener('click', function() {
+                fullImage.src = this.src;
+                caption.innerText = this.alt;
+                imageModal.show();
+            });
+        });
+    }
+});
