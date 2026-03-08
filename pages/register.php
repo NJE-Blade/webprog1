@@ -26,6 +26,7 @@
             </div>
             <div class="card-body p-4">
                 <form method="POST" action="<?php echo BASE_URL; ?>register-process">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div class="mb-3">
                         <label for="fullname" class="form-label small text-secondary-emphasis text-uppercase">Teljes név *</label>
                         <input id="fullname" name="fullname" type="text" class="form-control bg-black bg-opacity-50 border-secondary text-white"

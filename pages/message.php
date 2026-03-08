@@ -48,6 +48,7 @@
             </div>
             <div class="card-body p-4">
                 <form method="POST" action="<?php echo BASE_URL; ?>message-process">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="name" class="form-label small text-secondary-emphasis text-uppercase">Név *</label>
