@@ -8,6 +8,8 @@
 	$app = new Controller();
     $db = new Model();
 
+    $app->generateCsrfToken();
+
     $urlParts = $app->getUrlParts();
     $currentPage = $urlParts[0];
     
