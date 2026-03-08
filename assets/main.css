@@ -1,0 +1,493 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   VASZILIJ EDC — MAIN STYLESHEET
+   ════════════════════════════════════════════════════════════════════════════ */
+
+
+/* ── 1. ALAP TIPOGRÁFIA (minden oldal) ────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+}
+
+p {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.25rem;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.25rem;
+}
+
+
+/* ── 2. NAVBAR (minden oldal) ─────────────────────────────────────────────── */
+
+.nav-icon {
+    width: 52px;
+    height: auto;
+}
+
+.navbar-blur {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+/* ── 3. KÖZÖS ELEMEK (több oldalon használt) ──────────────────────────────── */
+
+/* Piros gondolatjeles címsor-előtag */
+.red-dash::before {
+    content: "— ";
+    color: #dc3545;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Egységes oldal-bevezető doboz */
+.page-header {
+    padding: 0.75rem 1rem;
+    border-left: 3px solid #dc3545;
+    margin-bottom: 1.25rem;
+}
+
+.page-header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.page-header .page-icon {
+    font-size: 50%;
+    vertical-align: middle;
+}
+
+/* Link stílus blog kártyákon */
+a.blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+
+/* ── 4. INDEX.HTML — Intro szekció ────────────────────────────────────────── */
+
+#intro {
+    background-image: url('../assets/bg_with_no_logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+#intro .container-xxl {
+    position: relative;
+    z-index: 1;
+}
+
+.intro-logo {
+    max-width: 280px;
+}
+
+
+/* ── 5. BLOG KÁRTYÁK (index, blogs) ──────────────────────────────────────── */
+
+.blog-card {
+    position: relative;
+    height: 280px;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+    border-top: 3px solid #dc3545;
+    transition: border-top-color 0.3s ease;
+}
+
+.blog-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    transition: background 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.blog-card:hover::before {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.blog-card:hover {
+    border-top-color: #ff0000;
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    padding: 1.25rem;
+    color: white;
+    width: 100%;
+}
+
+.card-content small {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+}
+
+.card-content h5 {
+    font-size: 1.25rem;
+    margin: 0.5rem 0;
+    font-weight: 600;
+}
+
+.card-content p {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+
+.card-content small:last-child {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Statikus kártya (bolt oldal) */
+.blog-card-static {
+    position: relative;
+    height: 280px;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+    transition: border-top-color 0.3s ease;
+}
+
+.blog-card-static::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1;
+}
+
+/* Blog kártya hover-animáció */
+.irasa-item-blog {
+    transition: all 0.3s ease;
+}
+
+.irasa-item-blog:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(220, 53, 69, 0.2);
+}
+
+
+/* ── 6. INDEX.HTML — Carousel szekció ─────────────────────────────────────── */
+
+.blog-card-carousel {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    border-top: 3px solid #dc3545;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.blog-card-carousel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.46);
+}
+
+#carouselExample .carousel-indicators [data-bs-target] {
+    background-color: #dac9cb !important;
+}
+
+
+/* ── 7. INDEX.HTML — Barátaink szekció ────────────────────────────────────── */
+
+.friends_logos {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+}
+
+.friends_names {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.friends_desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+
+/* ── 8. BLOGS.HTML — Szűrők ──────────────────────────────────────────────── */
+
+#blog_filter {
+    font-family: 'Rajdhani', sans-serif;
+}
+
+
+/* ── 9. WRITINGS.HTML — Írás elemek ──────────────────────────────────────── */
+
+.irasa-item {
+    transition: all 0.3s ease;
+    border-left: 2px solid #dc3545 !important;
+}
+
+.irasa-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(220, 53, 69, 0.2);
+}
+
+.a4-sheet {
+    background: #111;
+    border-radius: 0.5rem;
+}
+
+
+/* ── 10. GALLERY.HTML — Képek és modal ────────────────────────────────────── */
+
+.gallery-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border: 1px solid #1a1a1a;
+    cursor: pointer;
+    display: block;
+}
+
+.gallery-modal-img {
+    display: block;
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+}
+
+.gallery-modal .modal-content {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+
+/* ── 11. SUPPORT.HTML — Adománykártya ─────────────────────────────────────── */
+
+.bank-card-header-color {
+    background-color: #bd2727;
+}
+
+
+/* ── 12. SHOP.HTML — Térkép és bolt ───────────────────────────────────────── */
+
+.map-embed iframe {
+    width: 100%;
+    height: 450px;
+    filter: invert(90%) hue-rotate(180deg) contrast(90%) saturate(80%);
+}
+
+
+/* ── 13. SECRET.HTML — Titkos oldal ───────────────────────────────────────── */
+
+.body_secret {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('../assets/vasyblade.png');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+#secret-contain {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/vasyblade.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.team-box {
+    background: rgba(0, 0, 0, 0.69);
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: clamp(1.5rem, 5vw, 3rem) clamp(2rem, 8vw, 5rem);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+.team-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 20px rgba(212, 0, 0, 0.5);
+}
+
+.member-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: #ccc;
+    margin: 0.4rem 0;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+}
+
+.member-name:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(212, 0, 0, 0.6);
+}
+
+
+/* ── 14. BLOG BEJEGYZÉS OLDALAK (blog_*.html) ────────────────────────────── */
+
+.blog-article-hero {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-bottom: 3px solid #dc3545;
+}
+
+.blog-article-meta {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+}
+
+.gallery-card {
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+.gallery-card:hover {
+    border-color: #dc3545;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(220, 53, 69, 0.1);
+}
+.gallery-img-container {
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(220, 53, 69, 0.1);
+    cursor: pointer; /* kattinthatüság */
+}
+.gallery-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.gallery-card:hover img {
+    transform: scale(1.1);
+}
+.form-control:focus {
+    background-color: #1a1a1a !important;
+    border-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* kinagyított kép stílusa */
+#fullImage {
+    max-height: 85vh;
+    object-fit: contain;
+}
+.modal-backdrop.show {
+    opacity: 0.9 !important; /* ez arra kell, hogy a háttér elsötétüljön */
+}
+
+.admin-table {
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+        
+        .table {
+            margin-bottom: 0;
+            color: #ccc;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .table thead th {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            border-bottom: 2px solid #dc3545;
+            background-color: rgba(220, 53, 69, 0.1);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        .table tbody tr {
+            transition: background 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .table tbody tr:hover {
+            background: rgba(220, 53, 69, 0.05);
+            color: #fff;
+        }
+        
+        .btn-action {
+            padding: 0.25rem 0.5rem;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+        
+        .btn-action:hover {
+            transform: scale(1.2);
+        }
+        
+        /* szem ikon a cím mellett */
+        .view-icon {
+            font-size: 0.9rem;
+            opacity: 0.5;
+            transition: opacity 0.3s, color 0.3s;
+            vertical-align: middle;
+        }
+        
+        .view-icon:hover {
+            opacity: 1;
+            color: #dc3545 !important;
+        }
+
+        .form-control:focus {
+            background-color: #1a1a1a !important;
+            border-color: #dc3545 !important;
+            color: white !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+        }
+
+        
