@@ -44,6 +44,12 @@ class Controller {
 
     //Űrlapfeldolgozások vezérlése
     public function runAction($page) {
+
+        //CSRF ellenőrzés
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->checkCsrfToken($_POST['csrf_token'] ?? '');
+        }
+
         switch ($page) {
             case 'register-process':
                 $this->handleRegistration();
@@ -64,9 +70,13 @@ class Controller {
                         exit;
                     }
 
-                    $id = $this->urlParts[2] ?? null;
-                    if ($id) {
-                        $this->model->deleteMessage($id);
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $id = $_POST['id'] ?? null; // Most már a POST-ból jön az ID
+                        
+                        if ($id) {
+                            $this->model->deleteMessage($id);
+                            $_SESSION['admin_msg'] = "Üzenet sikeresen törölve!";
+                        }
                     }
         
                     header("Location: " . BASE_URL . "admin/uzenetek");
@@ -276,6 +286,22 @@ class Controller {
             header("Location: " . BASE_URL . "uzenetkuldes");
             exit;
         }
+    }
+
+    //CSRF token generálás
+    public function generateCsrfToken() {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+
+    //CSRF token ellenőrzés
+    public function checkCsrfToken($token) {
+        if (!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']) {
+            die("Biztonsági hiba: Érvénytelen CSRF token!");
+        }
+        return true;
     }
 
 }
