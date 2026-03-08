@@ -15,9 +15,11 @@
                 </div>
             </div>
             <div class="col-2">
-                <a href="<?php echo BASE_URL; ?>belepes" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0">
-                    Belépés
-                </a>
+                <?php if (!$app->isLoggedIn()): ?>
+                    <a href="<?php echo BASE_URL; ?>belepes" class="nav-link">
+                        Belépés
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

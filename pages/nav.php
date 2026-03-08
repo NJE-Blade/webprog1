@@ -26,3 +26,36 @@
 
             </div>
         </nav>
+        <?php if ($app->isLoggedIn()): ?>
+<div class="bg-dark border-bottom border-secondary py-1 shadow-sm">
+    <div class="container-xxl">
+        <div class="d-flex align-items-center overflow-x-auto no-scrollbar">
+            <div class="me-3 border-end border-secondary pe-3 d-flex align-items-center">
+                <i class="bi bi-shield-lock text-danger me-2"></i>
+                <small class="text-uppercase fw-bold text-secondary" style="font-size: 0.75rem; letter-spacing: 1px;">Adminisztráció</small>
+            </div>
+            <ul class="nav small flex-nowrap">
+                <li class="nav-item">
+                    <a class="nav-link text-light opacity-75 link-danger" href="<?php echo BASE_URL; ?>admin/bejegyzesek">
+                        <i class="bi bi-journal-text me-1"></i> Bejegyzések
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light opacity-75 link-danger" href="<?php echo BASE_URL; ?>admin/cikkek">
+                        <i class="bi bi-file-earmark-richtext me-1"></i> Cikkek
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light opacity-75 link-danger" href="<?php echo BASE_URL; ?>admin/uzenetek">
+                        <i class="bi bi-envelope-paper me-1"></i> Üzenetek
+                    </a>
+                </li>
+            </ul>
+            <div class="ms-auto ps-3 border-start border-secondary d-none d-sm-block">
+                <small class="text-muted">Üdv, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</small>
+                <a href="<?php echo BASE_URL; ?>kilepes" class="ms-2 text-danger text-decoration-none small"><i class="bi bi-box-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
