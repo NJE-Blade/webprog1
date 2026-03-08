@@ -1,6 +1,12 @@
 <?php
 // Üzenetek lekérése a modell segítségével
 $messages = $db->getAllMessages();
+
+$adminMsg = $_SESSION['admin_msg'] ?? null;
+$adminError = $_SESSION['admin_error'] ?? null;
+
+unset($_SESSION['admin_msg']);
+unset($_SESSION['admin_error']);
 ?>
 
 <section id="messages-admin" class="bg-black">
@@ -9,7 +15,21 @@ $messages = $db->getAllMessages();
             <h1>Üzenetek kezelése <i class="bi bi-envelope-paper text-danger ms-2"></i></h1>
             <p class="text-muted fst-italic mb-0">Itt tekintheted meg a látogatók által küldött összes üzenetet.</p>
         </div>
-        
+
+        <?php if ($adminMsg): ?>
+            <div class="alert alert-success alert-dismissible fade show bg-success bg-opacity-10 border-success text-success mb-4" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> <?php echo $adminMsg; ?>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($adminError): ?>
+            <div class="alert alert-danger alert-dismissible fade show bg-danger bg-opacity-10 border-danger text-danger mb-4" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> <?php echo $adminError; ?>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
         <div class="container px-0 mb-5">
             <div class="admin-table shadow-lg border border-secondary border-opacity-25 rounded-3 overflow-hidden">
                 <div class="table-responsive">
@@ -114,13 +134,17 @@ $messages = $db->getAllMessages();
                 <h5 class="modal-title" style="font-family: 'Cinzel', serif;">Törlés megerősítése</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body py-4" style="font-family: 'Crimson Text', serif; font-size: 1.2rem;"> 
-                Biztosan véglegesen törölni akarod ezt az üzenetet? Ez a művelet nem vonható vissza.
-            </div>
-            <div class="modal-footer border-top border-secondary">
-                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Mégse</button> 
-                <a href="" id="confirmDeleteBtn" class="btn btn-danger px-4 fw-bold shadow-sm">TÖRLÉS</a>
-            </div>
+            <form action="<?php echo BASE_URL; ?>admin/uzenet-torles" method="POST">
+                <div class="modal-body" style="font-family: 'Crimson Text', serif; font-size: 1.2rem;">
+                    Biztosan véglegesen törölni akarod ezt az elemet?
+                    <input type="hidden" name="id" id="delete-id">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                </div>
+                <div class="modal-footer border-top border-secondary">
+                    <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Mégse</button>
+                    <button type="submit" class="btn btn-danger px-5 fw-bold">TÖRLÉS</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -150,9 +174,9 @@ if (deleteModal) {
     deleteModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;
         const id = button.getAttribute('data-id');
-        const confirmBtn = deleteModal.querySelector('#confirmDeleteBtn');
         
-        confirmBtn.href = "<?php echo BASE_URL; ?>admin/uzenet-torles/" + id;
+        deleteModal.querySelector('#delete-id').value = id;
     });
 }
+
 </script>
