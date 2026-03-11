@@ -186,21 +186,33 @@ class Model {
         }
     }
 
-    // Összes bejegyzés lekérdezése
-    public function getAllBlogs() {
+    // Összes bejegyzés lekérdezése + keresőkifejezés van?
+    public function getAllBlogs($search = null) {
         try {
-            
             $sql = "SELECT b.*, f.nev as szerzo_neve 
                     FROM blog b 
-                    LEFT JOIN felhasznalok f ON b.user_id = f.id 
-                    ORDER BY b.iras_ideje DESC";
-            $stmt = $this->db->query($sql);
+                    LEFT JOIN felhasznalok f ON b.user_id = f.id";
+            
+            if ($search) {
+                $sql .= " WHERE b.cim LIKE :s1 OR b.tartalom LIKE :s2";
+            }
+            
+            $sql .= " ORDER BY b.iras_ideje DESC";
+            
+            $stmt = $this->db->prepare($sql);
+            
+            if ($search) {
+                $searchTerm = "%$search%";
+                $stmt->bindValue(':s1', $searchTerm);
+                $stmt->bindValue(':s2', $searchTerm);
+            }
+            
+            $stmt->execute();
             return $stmt->fetchAll();
         } catch (PDOException $e) {
-            error_log("Blog lekérdezési hiba: " . $e->getMessage());
             return [];
         }
-    } 
+    }
     
     // Összes írás lekérdezése
     public function getAllWritings() {
