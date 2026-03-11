@@ -63,6 +63,27 @@ class Controller {
             case 'kilepes':
                 $this->logout();
                 break;
+            case 'kep-feltoltes':
+                $this->handleImageUpload();
+                break;
+            case 'bejegyzes-mentes':
+                $this->handlePostSave();
+                break;
+            case 'bejegyzes-torles':
+                $this->handlePostDelete();
+                break;
+            case 'iras-mentes':
+                $this->handleWritingSave();
+                break;
+            case 'iras-torles':
+                $this->handleWritingDelete();
+                break;
+            case 'galeria-feltoltes':
+                $this->handleGalleryUpload();
+                break;
+            case 'galeria-torles':
+                $this->handleGalleryDelete();
+                break;
             case 'admin':
                 if (isset($this->urlParts[1]) && $this->urlParts[1] === 'uzenet-torles') {
                     if (!$this->isLoggedIn()) {
@@ -71,7 +92,7 @@ class Controller {
                     }
 
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        $id = $_POST['id'] ?? null; // Most már a POST-ból jön az ID
+                        $id = $_POST['id'] ?? null;
                         
                         if ($id) {
                             $this->model->deleteMessage($id);
@@ -83,6 +104,7 @@ class Controller {
                     exit;
                 }
                 break;
+            
         }
     }
 
@@ -122,7 +144,9 @@ class Controller {
 
             $adminPages = [
                 'bejegyzesek' => 'pages/admin/a_blogs.php',
-                'cikkek'      => 'pages/admin/a_writings.php',
+                'bejegyzes-szerkesztes' => 'pages/admin/a_edit_blog.php',
+                'iras-szerkesztes' => 'pages/admin/a_edit_writing.php',
+                'irasok'      => 'pages/admin/a_writings.php',
                 'uzenetek'    => 'pages/admin/a_messages.php',
             ];
 
@@ -296,12 +320,271 @@ class Controller {
         return $_SESSION['csrf_token'];
     }
 
+    
     //CSRF token ellenőrzés
+    /*
     public function checkCsrfToken($token) {
         if (!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']) {
             die("Biztonsági hiba: Érvénytelen CSRF token!");
         }
         return true;
+    }
+    */
+
+    public function checkCsrfToken($token) {
+    if (empty($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']) {
+        // Ellenőrizzük, hogy AJAX kérés-e (Summernote feltöltés)
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' || 
+            (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false)) {
+            
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Biztonsági hiba: Érvénytelen CSRF token!']);
+            exit;
+        }
+        
+        // Sima űrlap esetén maradhat a szigorú leállás
+        die("Biztonsági hiba: Érvénytelen CSRF token!");
+    }
+    return true;
+}
+
+    //Képfeltöltés kezelése
+    public function handleImageUpload() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !$this->isLoggedIn()) {
+            echo json_encode(['error' => 'Illetéktelen hozzáférés']);
+            exit;
+        }
+
+        if (isset($_FILES['image'])) {
+            $file = $_FILES['image'];
+            $uploadDir = 'pictures/';
+            
+            // Mappa ellenőrzése
+            if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+
+            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $fileName = 'post_' . time() . '_' . uniqid() . '.' . $ext;
+            $targetPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+                echo json_encode(['url' => BASE_URL . $targetPath]);
+            } else {
+                echo json_encode(['error' => 'Sikertelen fájlmozgatás']);
+            }
+        }
+    exit;
+    }
+    
+    //Blogbejegyzés mentése vagy frissítése
+    public function handlePostSave() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->isLoggedIn()) {
+            $id = $_POST['post_id'] ?? null;
+            $title = trim($_POST['title'] ?? '');
+            $content = $_POST['content'] ?? '';
+
+            if (!empty($title) && !empty($content)) {
+                if ($id) {
+                    // UPDATE ág
+                    $success = $this->model->updatePost([
+                        'id' => $id,
+                        'title' => $title,
+                        'content' => $content
+                    ]);
+                    $msg = "Bejegyzés sikeresen frissítve!";
+                } else {
+                    // INSERT ág
+                    $success = $this->model->savePost([
+                        'title' => $title,
+                        'content' => $content,
+                        'user_id' => $_SESSION['user_id']
+                    ]);
+                    $msg = "Bejegyzés sikeresen közzétéve!";
+                }
+
+                if ($success) {
+                    $_SESSION['admin_msg'] = $msg;
+                    unset($_SESSION['tmp_post']);
+                    header("Location: " . BASE_URL . "admin/bejegyzesek");
+                    exit;
+                }
+            }
+
+            $_SESSION['tmp_post'] = $_POST; 
+            $_SESSION['admin_error'] = "Minden mező kitöltése kötelező!";
+            
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+    }
+
+    //Bejegyzés törlése
+    public function handlePostDelete() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->isLoggedIn()) {
+    
+            $id = $_POST['delete_id'] ?? null;
+            if ($id && $this->model->deleteBlogPost($id)) {
+                $_SESSION['admin_msg'] = "Bejegyzés sikeresen törölve!";
+            } else {
+                $_SESSION['admin_error'] = "Hiba történt a törlés során!";
+            }
+            header("Location: " . BASE_URL . "admin/bejegyzesek");
+            exit;
+        }
+    }
+
+    //Írás mentése vagy frissítése
+    public function handleWritingSave() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->isLoggedIn()) {
+            $id = $_POST['post_id'] ?? null;
+            $title = trim($_POST['title'] ?? '');
+            $content = $_POST['content'] ?? '';
+
+            if (!empty($title) && !empty($content)) {
+                if ($id) {
+                    // UPDATE ág
+                    $success = $this->model->updateWriting([
+                        'id' => $id,
+                        'title' => $title,
+                        'content' => $content
+                    ]);
+                    $msg = "Írás sikeresen frissítve!";
+                } else {
+                    // INSERT ág
+                    $success = $this->model->saveWriting([
+                        'title' => $title,
+                        'content' => $content,
+                        'user_id' => $_SESSION['user_id']
+                    ]);
+                    $msg = "Írás sikeresen közzétéve!";
+                }
+
+                if ($success) {
+                    $_SESSION['admin_msg'] = $msg;
+                    unset($_SESSION['tmp_post']);
+                    header("Location: " . BASE_URL . "admin/irasok");
+                    exit;
+                }
+            }
+
+            $_SESSION['tmp_post'] = $_POST; 
+            $_SESSION['admin_error'] = "Minden mező kitöltése kötelező!";
+            
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+    }
+
+    //Bejegyzés törlése
+    public function handleWritingDelete() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->isLoggedIn()) {
+    
+            $id = $_POST['delete_id'] ?? null;
+            if ($id && $this->model->deleteWriting($id)) {
+                $_SESSION['admin_msg'] = "Írás sikeresen törölve!";
+            } else {
+                $_SESSION['admin_error'] = "Hiba történt a törlés során!";
+            }
+            header("Location: " . BASE_URL . "admin/irasok");
+            exit;
+        }
+    }
+
+    //Slug generálás szövegből
+    public function createSlug($text) {
+        $replace = [
+            'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ö' => 'o', 'ő' => 'o', 
+            'ú' => 'u', 'ü' => 'u', 'ű' => 'u',
+            'Á' => 'a', 'É' => 'e', 'Í' => 'i', 'Ó' => 'o', 'Ö' => 'o', 'Ő' => 'o', 
+            'Ú' => 'u', 'Ü' => 'u', 'Ű' => 'u'
+        ];
+        $text = strtr($text, $replace);
+
+        $text = mb_strtolower($text, 'UTF-8');
+
+        $text = preg_replace('/[^a-z0-9\s-]/', '', $text);
+
+        $text = preg_replace('/[\s-]+/', '-', $text);
+
+        return trim($text, '-');
+    }
+
+    // Első kép url kinyerése bejegyzés tartalmából
+    public function getFirstImageUrl($html) {
+        if (preg_match('/<img.+?src=["\'](.+?)["\'].*?>/i', $html, $matches)) {
+            return $matches[1];
+        }
+        return BASE_URL . 'assets/blog_pictures/default_cover.jpg';
+    }
+
+    // Rövid leírás a bejegyzésből
+    public function getExcerpt($html, $limit = 120) {
+        $text = strip_tags($html); 
+        if (mb_strlen($text) > $limit) {
+            return mb_substr($text, 0, $limit) . '...';
+        }
+        return $text;
+    }
+
+    //Képfeltöltés galériába
+    private function handleGalleryUpload() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->isLoggedIn()) {
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                die("Érvénytelen biztonsági token (CSRF).");
+            }
+
+            $title = $_POST['title'] ?? 'Névtelen kép';
+            
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+                if (!in_array($_FILES['image']['type'], $allowedTypes)) {
+                    $_SESSION['admin_error'] = "Csak JPG, PNG és WebP formátum engedélyezett!";
+                    header("Location: " . BASE_URL . "galeria");
+                    exit;
+                }
+
+                $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $newFilename = uniqid('edc_') . '.' . $ext;
+                $destination = 'gallery/' . $newFilename;
+
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+                    $this->model->saveGalleryImage($title, $newFilename, $_SESSION['user_id']);
+                    $_SESSION['admin_msg'] = "Kép sikeresen feltöltve!";
+                } else {
+                    $_SESSION['admin_error'] = "Hiba történt a fájl mentésekor.";
+                }
+            }
+            header("Location: " . BASE_URL . "galeria");
+            exit;
+        }
+    }
+
+    //Kép törlés galéria
+    private function handleGalleryDelete() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->isLoggedIn()) {
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                die("Érvénytelen biztonsági token (CSRF).");
+            }
+
+            $id = $_POST['image_id'] ?? null;
+            $image = $this->model->getGalleryImageById($id);
+
+            if ($image) {
+                $filePath = 'gallery/' . $image['fajlnev'];
+                
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+                
+                if ($this->model->deleteGalleryImage($id)) {
+                    $_SESSION['admin_msg'] = "Kép sikeresen törölve!";
+                } else {
+                    $_SESSION['admin_error'] = "Hiba történt az adatbázisból való törléskor.";
+                }
+            }
+            
+            header("Location: " . BASE_URL . "galeria");
+            exit;
+        }
     }
 
 }

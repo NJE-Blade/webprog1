@@ -141,13 +141,267 @@ class Model {
 
     //Üzenet törlése
     public function deleteMessage($id) {
-    try {
-        $stmt = $this->db->prepare("DELETE FROM uzenetek WHERE id = ?");
-        return $stmt->execute([intval($id)]);
-    } catch (PDOException $e) {
-        error_log("Üzenet törlési hiba: " . $e->getMessage());
-        return false;
+        try {
+            $stmt = $this->db->prepare("DELETE FROM uzenetek WHERE id = ?");
+            return $stmt->execute([intval($id)]);
+        } catch (PDOException $e) {
+            error_log("Üzenet törlési hiba: " . $e->getMessage());
+            return false;
+        }
     }
-}
+
+    //Blogbejegyzés letárolása
+    public function savePost($data) {
+        try {
+            // Az SQL fájlod alapján a tábla 'blog', a mezők 'cim', 'tartalom', 'user_id'
+            $sql = "INSERT INTO blog (cim, tartalom, user_id, iras_ideje) 
+                    VALUES (:title, :content, :user_id, NOW())";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                ':title'   => $data['title'],
+                ':content' => $data['content'],
+                ':user_id' => $data['user_id']
+            ]);
+        } catch (PDOException $e) {
+            error_log("Blogger mentési hiba: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    //Írás letárolása
+    public function saveWriting($data) {
+        try {
+            // Az SQL fájlod alapján a tábla 'blog', a mezők 'cim', 'tartalom', 'user_id'
+            $sql = "INSERT INTO irasok (cim, tartalom, user_id, iras_ideje) 
+                    VALUES (:title, :content, :user_id, NOW())";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                ':title'   => $data['title'],
+                ':content' => $data['content'],
+                ':user_id' => $data['user_id']
+            ]);
+        } catch (PDOException $e) {
+            error_log("Blogger mentési hiba: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Összes bejegyzés lekérdezése
+    public function getAllBlogs() {
+        try {
+            
+            $sql = "SELECT b.*, f.nev as szerzo_neve 
+                    FROM blog b 
+                    LEFT JOIN felhasznalok f ON b.user_id = f.id 
+                    ORDER BY b.iras_ideje DESC";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Blog lekérdezési hiba: " . $e->getMessage());
+            return [];
+        }
+    } 
+    
+    // Összes írás lekérdezése
+    public function getAllWritings() {
+        try {
+            
+            $sql = "SELECT b.*, f.nev as szerzo_neve 
+                    FROM irasok b 
+                    LEFT JOIN felhasznalok f ON b.user_id = f.id 
+                    ORDER BY b.iras_ideje DESC";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Írás lekérdezési hiba: " . $e->getMessage());
+            return [];
+        }
+    }  
+
+    public function updatePost($data) {
+        try {
+            $sql = "UPDATE blog SET cim = :title, tartalom = :content WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                ':title'   => $data['title'],
+                ':content' => $data['content'],
+                ':id'      => $data['id']
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    //Írás frissítése id alapján
+    public function updateWriting($data) {
+        try {
+            $sql = "UPDATE irasok SET cim = :title, tartalom = :content WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                ':title'   => $data['title'],
+                ':content' => $data['content'],
+                ':id'      => $data['id']
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    //Bejegyzés lekérése id alaőján szerkesztéshez
+    public function getPostById($id) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM blog WHERE id = ?");
+            $stmt->execute([intval($id)]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    //Írás lekérése id alaőján szerkesztéshez
+    public function getWritingById($id) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM irasok WHERE id = ?");
+            $stmt->execute([intval($id)]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    //Bejegyzés törlése
+    public function deleteBlogPost($id) {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM blog WHERE id = ?");
+            return $stmt->execute([intval($id)]);
+        } catch (PDOException $e) {
+            error_log("Blog törlési hiba: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    //Írás törlése
+    public function deleteWriting($id) {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM irasok WHERE id = ?");
+            return $stmt->execute([intval($id)]);
+        } catch (PDOException $e) {
+            error_log("Blog törlési hiba: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    //Bejegyzés lekérése id alapján public oldalhoz szerző nevével együtt.
+    public function getPostWithAuthor($id) {
+        try {
+            $sql = "SELECT b.*, f.nev as szerzo_neve 
+                    FROM blog b 
+                    LEFT JOIN felhasznalok f ON b.user_id = f.id 
+                    WHERE b.id = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([intval($id)]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    //Írás lekérése id alapján public oldalhoz szerző nevével együtt.
+    public function getWritingWithAuthor($id) {
+        try {
+            $sql = "SELECT b.*, f.nev as szerzo_neve 
+                    FROM irasok b 
+                    LEFT JOIN felhasznalok f ON b.user_id = f.id 
+                    WHERE b.id = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([intval($id)]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    //3 legfrissebb blogbejegyzés lekérése
+    public function getLatestBlogs($limit = 3) {
+        try {
+            $sql = "SELECT b.*, f.nev as szerzo_neve 
+                    FROM blog b 
+                    LEFT JOIN felhasznalok f ON b.user_id = f.id 
+                    ORDER BY b.iras_ideje DESC 
+                    LIMIT " . intval($limit);
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+    //A 3 legfrissebb írás lekérése
+    public function getLatestWritings($limit = 3) {
+        try {
+            $sql = "SELECT i.*, f.nev as szerzo_neve 
+                    FROM irasok i 
+                    LEFT JOIN felhasznalok f ON i.user_id = f.id 
+                    ORDER BY i.iras_ideje DESC 
+                    LIMIT " . intval($limit);
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+    //Galéria képek lekérése
+    public function getGalleryImages() {
+        try {
+            $sql = "SELECT * FROM kepek ORDER BY feltoltes_ideje DESC";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+    //Új kép mentése
+    public function saveGalleryImage($title, $filename, $userId) {
+        try {
+            $sql = "INSERT INTO kepek (elnevezes, fajlnev, user_id) VALUES (?, ?, ?)";
+            return $this->db->prepare($sql)->execute([$title, $filename, $userId]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    //Kép lekérése id alapján
+    public function getGalleryImageById($id) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM kepek WHERE id = ?");
+            $stmt->execute([intval($id)]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    //Kép törlése
+    public function deleteGalleryImage($id) {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM kepek WHERE id = ?");
+            return $stmt->execute([intval($id)]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    //4 legfrissebb kép főoldali carousel-hez
+    public function getLatestGalleryImages($limit = 4) {
+        try {
+            $sql = "SELECT * FROM kepek ORDER BY feltoltes_ideje DESC LIMIT " . intval($limit);
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
 
 }
