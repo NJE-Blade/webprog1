@@ -51,7 +51,7 @@ unset($_SESSION['admin_error']);
                                 <?php foreach ($messages as $msg): ?>
                                     <tr>
                                         <td class="ps-4">
-                                            <span class="text-danger fw-bold small">
+                                            <span class="ps-4 opacity-75 small">
                                                 <?php echo date('Y.m.d. H:i', strtotime($msg['bekuldes_ideje'])); ?>
                                             </span>
                                         </td>
@@ -66,7 +66,7 @@ unset($_SESSION['admin_error']);
                                         </td>
                                         <td class="text-center pe-4">
                                             <div class="d-flex justify-content-center gap-2">
-                                                <button type="button" class="btn btn-outline-light btn-sm px-3" 
+                                                <button type="button" class="btn btn-action text-info" 
                                                         data-bs-toggle="modal" 
                                                         data-bs-target="#viewMessageModal" 
                                                         data-id="<?php echo htmlspecialchars($msg['id']); ?>"
@@ -76,10 +76,10 @@ unset($_SESSION['admin_error']);
                                                         data-content="<?php echo htmlspecialchars($msg['uzenet_szovege']); ?>">
                                                     <i class="bi bi-eye"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-danger btn-sm" 
+                                                <button type="button" class="btn btn-action text-danger" 
                                                         data-bs-toggle="modal" data-bs-target="#deleteModal" 
                                                         data-id="<?php echo $msg['id']; ?>">
-                                                    <i class="bi bi-trash"></i>
+                                                    <i class="bi bi-trash3-fill"></i>
                                                 </button>
                                             </div>
                                         </td>
