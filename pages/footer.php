@@ -11,7 +11,7 @@
                 </p>
                 <div>
                     <a href="<?php echo BASE_URL; ?>pages/blades_intro.html"><img src="<?php echo BASE_URL; ?>/assets/blades_logo.svg" alt="teeth" width="36px"></a>
-                    Blades | Web developement Team's demo
+                    Blade | Web developement Team's demo
                 </div>
             </div>
             <div class="col-2">

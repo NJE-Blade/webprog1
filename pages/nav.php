@@ -13,7 +13,7 @@
                         <?php
                             foreach($publicMenuItems as $item) {
                         ?>
-                        <li class="nav-item"><a href="<?php echo BASE_URL; ?><?php echo $item['ekezettelen_nev']; ?>" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><?php echo $item["megjelenitesi_nev"]; ?></a></li>
+                        <li class="nav-item text-uppercase"><a href="<?php echo BASE_URL; ?><?php echo $item['ekezettelen_nev']; ?>" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><?php echo $item["megjelenitesi_nev"]; ?></a></li>
                         <?php } ?>
                         <li class="nav-item d-md-none"><a href="https://www.facebook.com/VaszilijEdc/" class="nav-link text-decoration-underline link-underline-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">FACEBOOK OLDALUNK</a></li>
                         
@@ -41,8 +41,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light opacity-75 link-danger" href="<?php echo BASE_URL; ?>admin/cikkek">
-                        <i class="bi bi-file-earmark-richtext me-1"></i> Cikkek
+                    <a class="nav-link text-light opacity-75 link-danger" href="<?php echo BASE_URL; ?>admin/irasok">
+                        <i class="bi bi-file-earmark-richtext me-1"></i> Írások
                     </a>
                 </li>
                 <li class="nav-item">
