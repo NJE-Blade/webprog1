@@ -1,5 +1,7 @@
 <?php
-    $blogPosts = $db->getAllBlogs();
+    
+    $search = $_GET['search'] ?? null;
+    $blogPosts = $db->getAllBlogs($search);
 ?>
 
 <section id="blogs" class="bg-black bg-opacity-75 py-4">
@@ -28,12 +30,26 @@
             <h4 class="text-muted">Kés és egyéb eszköz bemutatók, beszámolók...</h4>
             <div class="row g-2 align-items-center">
                 <div class="col-sm-12 col-md-6 mb-1">
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Keresés a Blogok közt...">
+                    <form action="<?php echo BASE_URL; ?>blog" method="GET" class="d-flex gap-2">
+                        <div class="input-group">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <input type="text" name="search" class="form-control bg-dark border-secondary text-white" placeholder="Keresés a bejegyzések között..." value="<?php echo htmlspecialchars($search ?? ''); ?>">
+                        </div>
+                        <?php if ($search): ?>
+                            <a href="<?php echo BASE_URL; ?>blog" class="btn btn-outline-secondary">X</a>
+                        <?php endif; ?>
+                    </form>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="d-flex flex-wrap gap-2 align-items-center" role="group" aria-label="Szűrők">
+                        <a href="<?php echo BASE_URL . 'blog?search=kés'; ?>" class="btn btn-outline-danger text-uppercase">KÉSEK</a>
+                        <a href="<?php echo BASE_URL . 'blog?search=bicska'; ?>" class="btn btn-outline-danger text-uppercase">BICSKÁK</a>
+                        <a href="<?php echo BASE_URL . 'blog?search=felszerelés'; ?>" class="btn btn-outline-danger text-uppercase">FELSZERELÉSEK</a>
+                        <a href="<?php echo BASE_URL . 'blog?search=ajánl'; ?>" class="btn btn-outline-danger text-uppercase">AJÁNLÁSOK</a>
                     </div>
                 </div>
-                
             </div>
         </div>
     </section>
