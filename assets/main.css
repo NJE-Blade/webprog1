@@ -334,7 +334,6 @@ a.blog-card-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/vasyblade.png');
     background-size: 100%;
     background-repeat: no-repeat;
 }
