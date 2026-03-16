@@ -98,7 +98,7 @@ unset($_SESSION['admin_error']);
                 <h5 class="modal-title text-white" id="deleteModalLabel" style="font-family: 'Cinzel', serif;">Törlés megerősítése</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="<?php echo BASE_URL; ?>bejegyzes-torles" method="POST">
+            <form action="<?php echo BASE_URL; ?>iras-torles" method="POST">
                 <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <input type="hidden" name="delete_id" id="delete_id">
                 
