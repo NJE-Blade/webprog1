@@ -23,7 +23,7 @@
 <section id="new-post" class="bg-black py-5">
     <div class="container">
         <div class="page-header mb-5">
-            <h1>Új blogbejegyzés <i class="bi bi-pen text-danger ms-2"></i></h1>
+            <h1><?php echo (!isset($editId)?"Új blogbejegyzés":"Blogbejegyzés szerkesztése"); ?> <i class="bi bi-pen text-danger ms-2"></i></h1>
             <p class="text-muted fst-italic">Hozz létre egy új, maradandó tartalmat a Vaszilij EDC közösség számára.</p>
         </div>
         <?php if ($msgHiba): ?>
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end gap-3 mt-5">
-                        <a href="<?php echo BASE_URL; ?>admin/irasok" class="btn btn-outline-secondary px-4">MÉGSE</a>
+                        <a href="<?php echo BASE_URL; ?>admin/blog" class="btn btn-outline-secondary px-4">MÉGSE</a>
                         <button type="submit" class="btn btn-danger px-5 fw-bold">BEJEGYZÉS KÖZZÉTÉTELE</button>
                     </div>
                 </form>

@@ -7,7 +7,7 @@
     $postData = null;
 
     if ($editId && empty($old)) {
-        $postData = $db->getPostById($editId);
+        $postData = $db->getWritingById($editId);
     }
 
     $displayId      = $editId;
@@ -23,7 +23,7 @@
 <section id="new-post" class="bg-black py-5">
     <div class="container">
         <div class="page-header mb-5">
-            <h1>Új blogbejegyzés <i class="bi bi-pen text-danger ms-2"></i></h1>
+            <h1><?php echo (!isset($editId)?"Új írás":"Írás szerkesztése"); ?><i class="bi bi-pen text-danger ms-2"></i></h1>
             <p class="text-muted fst-italic">Hozz létre egy új, maradandó tartalmat a Vaszilij EDC közösség számára.</p>
         </div>
         <?php if ($msgHiba): ?>
