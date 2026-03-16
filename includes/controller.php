@@ -124,9 +124,12 @@ class Controller {
                 $entry = $this->model->getEntryById($firstPart, $entryId);
                 
                 if ($entry) {
-                    $title .= " | " . ($entry['cim'] ?? $entry['title']);
+                    $title .= " - " . ($entry['cim'] ?? $entry['title']);
                 }
             }
+
+            $title.= " | Vaszilij EDC";
+
         }
         return $title;
     }
@@ -586,5 +589,7 @@ class Controller {
             exit;
         }
     }
+
+    
 
 }

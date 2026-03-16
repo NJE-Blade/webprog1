@@ -187,7 +187,7 @@ class Model {
     }
 
     // Összes bejegyzés lekérdezése + keresőkifejezés van?
-    public function getAllBlogs($search = null) {
+    public function getAllBlogs($search = null, $limit = 6, $offset = 0) {
         try {
             $sql = "SELECT b.*, f.nev as szerzo_neve 
                     FROM blog b 
@@ -198,6 +198,10 @@ class Model {
             }
             
             $sql .= " ORDER BY b.iras_ideje DESC";
+
+            if ($limit !== null) {
+                $sql .= " LIMIT " . intval($limit) . " OFFSET " . intval($offset);
+            }
             
             $stmt = $this->db->prepare($sql);
             
@@ -213,22 +217,56 @@ class Model {
             return [];
         }
     }
-    
-    // Összes írás lekérdezése
-    public function getAllWritings() {
+
+    //összes blog lapozóhoz
+    public function countBlogs($search = null) {
         try {
-            
+            $sql = "SELECT COUNT(*) FROM blog b";
+            if ($search) {
+                $sql .= " WHERE b.cim LIKE :s1 OR b.tartalom LIKE :s2";
+            }
+            $stmt = $this->db->prepare($sql);
+            if ($search) {
+                $searchTerm = "%$search%";
+                $stmt->bindValue(':s1', $searchTerm);
+                $stmt->bindValue(':s2', $searchTerm);
+            }
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            return 0;
+        }
+    }
+    
+    //összes írás lekérdezése
+    public function getAllWritings($limit = null, $offset = 0) {
+        try {
             $sql = "SELECT b.*, f.nev as szerzo_neve 
                     FROM irasok b 
                     LEFT JOIN felhasznalok f ON b.user_id = f.id 
                     ORDER BY b.iras_ideje DESC";
+
+            if ($limit !== null) {
+                $sql .= " LIMIT " . intval($limit) . " OFFSET " . intval($offset);
+            }
+
             $stmt = $this->db->query($sql);
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             error_log("Írás lekérdezési hiba: " . $e->getMessage());
             return [];
         }
-    }  
+    }
+
+    //írások számolása
+    public function countWritings() {
+        try {
+            $stmt = $this->db->query("SELECT COUNT(*) FROM irasok");
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            return 0;
+        }
+    }
 
     public function updatePost($data) {
         try {
