@@ -1,7 +1,18 @@
 <?php
-    
-    $search = $_GET['search'] ?? null;
-    $blogPosts = $db->getAllBlogs($search);
+    $search      = $_GET['search'] ?? null;
+
+$perPage = 9;
+$totalPosts  = $db->countBlogs($search);
+$totalPages  = (int) ceil($totalPosts / $perPage);
+$currentPage = max(1, min((int)($_GET['page'] ?? 1), $totalPages ?: 1));
+$offset      = ($currentPage - 1) * $perPage;
+
+$blogPosts   = $db->getAllBlogs($search, $perPage, $offset);
+
+$queryBase = http_build_query(array_filter([
+    'search'   => $search,
+]));
+$queryBase = $queryBase ? '&' . $queryBase : '';
 ?>
 
 <section id="blogs" class="bg-black bg-opacity-75 py-4">
@@ -85,5 +96,35 @@
                     </div>
                 <?php endif; ?>
             </div>
+
+            <?php if ($totalPages > 1): ?>
+    
+    <nav aria-label="Lapozó" class="d-flex justify-content-center">
+        <ul class="pagination pagination mb-0">
+            <li class="page-item <?php echo $currentPage <= 1 ? 'disabled' : ''; ?>">
+                <a class="page-link bg-dark border-secondary text-white" 
+                   href="<?php echo BASE_URL . 'blog?page=' . ($currentPage - 1) . $queryBase; ?>">
+                    &laquo;
+                </a>
+            </li>
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>">
+                    <a class="page-link <?php echo $i === $currentPage ? 'bg-danger border-danger' : 'bg-dark border-secondary text-white'; ?>"
+                       href="<?php echo BASE_URL . 'blog?page=' . $i . $queryBase; ?>">
+                        <?php echo $i; ?>
+                    </a>
+                </li>
+            <?php endfor; ?>
+            <li class="page-item <?php echo $currentPage >= $totalPages ? 'disabled' : ''; ?>">
+                <a class="page-link bg-dark border-secondary text-white"
+                   href="<?php echo BASE_URL . 'blog?page=' . ($currentPage + 1) . $queryBase; ?>">
+                    &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+<?php endif; ?>
+
         </div>
     </section>
+    

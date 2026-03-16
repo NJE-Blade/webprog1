@@ -1,5 +1,13 @@
 <?php
-    $blogPosts = $db->getAllWritings();
+    $perPage     = 9;
+    $totalPosts  = $db->countWritings();
+    $totalPages  = (int) ceil($totalPosts / $perPage);
+    $currentPage = max(1, min((int)($_GET['page'] ?? 1), $totalPages ?: 1));
+    $offset      = ($currentPage - 1) * $perPage;
+
+    $blogPosts   = $db->getAllWritings($perPage, $offset);
+
+    $queryBase = $currentPage > 1 ? '' : '';
 ?>
 
 <section id="writings" class="bg-black py-4">
@@ -40,8 +48,38 @@
                     </div>
                 <?php endif; ?>
             </div>
+
+            <?php if ($totalPages > 1): ?>
+                <nav aria-label="Lapozó" class="d-flex justify-content-center my-4">
+                    <ul class="pagination mb-0">
+                        <li class="page-item <?php echo $currentPage <= 1 ? 'disabled' : ''; ?>">
+                            <a class="page-link bg-dark border-secondary text-white" 
+                               href="<?php echo BASE_URL . 'irasok?page=' . ($currentPage - 1); ?>">
+                                &laquo;
+                            </a>
+                        </li>
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                            <li class="page-item <?php echo $i === $currentPage ? 'active' : ''; ?>">
+                                <a class="page-link <?php echo $i === $currentPage ? 'bg-danger border-danger' : 'bg-dark border-secondary text-white'; ?>"
+                                   href="<?php echo BASE_URL . 'irasok?page=' . $i; ?>">
+                                    <?php echo $i; ?>
+                                </a>
+                            </li>
+                        <?php endfor; ?>
+                        <li class="page-item <?php echo $currentPage >= $totalPages ? 'disabled' : ''; ?>">
+                            <a class="page-link bg-dark border-secondary text-white"
+                               href="<?php echo BASE_URL . 'irasok?page=' . ($currentPage + 1); ?>">
+                                &raquo;
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            <?php endif; ?>
+
         </div>
     </section>
+
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
