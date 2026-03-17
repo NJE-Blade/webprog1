@@ -134,14 +134,11 @@
     const imageViewerModal = document.getElementById('imageModal');
     if (imageViewerModal) {
         imageViewerModal.addEventListener('show.bs.modal', function (event) {
-            // A gomb (vagy kép), amire kattintottak
             const triggerElement = event.relatedTarget;
             
-            // Adatok kinyerése a data- attribútumokból
             const imgSrc = triggerElement.getAttribute('data-bs-img');
             const imgTitle = triggerElement.getAttribute('data-bs-title');
             
-            // Modal elemeinek megkeresése és frissítése
             const modalImage = imageViewerModal.querySelector('#fullImage');
             const modalTitle = imageViewerModal.querySelector('#imageCaption');
             

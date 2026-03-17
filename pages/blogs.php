@@ -1,18 +1,20 @@
 <?php
     $search      = $_GET['search'] ?? null;
 
-$perPage = 9;
-$totalPosts  = $db->countBlogs($search);
-$totalPages  = (int) ceil($totalPosts / $perPage);
-$currentPage = max(1, min((int)($_GET['page'] ?? 1), $totalPages ?: 1));
-$offset      = ($currentPage - 1) * $perPage;
+    $perPage = 9;
+    $totalPosts  = $db->countBlogs($search);
+    $totalPages  = (int) ceil($totalPosts / $perPage);
+    $currentPage = max(1, min((int)($_GET['page'] ?? 1), $totalPages ?: 1));
+    $offset      = ($currentPage - 1) * $perPage;
 
-$blogPosts   = $db->getAllBlogs($search, $perPage, $offset);
+    $blogPosts   = $db->getAllBlogs($search, $perPage, $offset);
 
-$queryBase = http_build_query(array_filter([
-    'search'   => $search,
-]));
-$queryBase = $queryBase ? '&' . $queryBase : '';
+
+    $queryBase = http_build_query(array_filter([
+        'search'   => $search,
+    ]));
+    
+    $queryBase = $queryBase ? '&' . $queryBase : '';
 ?>
 
 <section id="blogs" class="bg-black bg-opacity-75 py-4">
@@ -82,9 +84,10 @@ $queryBase = $queryBase ? '&' . $queryBase : '';
                             <a href="<?php echo $url; ?>" class="blog-card-link">
                                 <div class="blog-card irasa-item-blog" style="background-image: url('<?php echo $firstImg; ?>');">
                                     <div class="card-content">
+                                        <small class="text-danger text-uppercase fw-bold"><?php echo htmlspecialchars($post['szerzo_neve']); ?></small>
                                         <h5><?php echo htmlspecialchars($post['cim']); ?></h5>
                                         <p class="text-muted"><?php echo htmlspecialchars($excerpt); ?></p>
-                                        <small class="text-muted"><?php echo date('Y. m. d.', strtotime($post['iras_ideje'])); ?></small>
+                                        <small class="text-muted"><?php echo date('Y.m.d.', strtotime($post['iras_ideje'])); ?></small>
                                     </div>
                                 </div>
                             </a>
@@ -127,4 +130,3 @@ $queryBase = $queryBase ? '&' . $queryBase : '';
 
         </div>
     </section>
-    

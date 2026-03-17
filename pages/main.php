@@ -40,9 +40,10 @@
                         <a href="<?php echo $url; ?>" class="blog-card-link">
                             <div class="blog-card irasa-item-blog" style="background-image: url('<?php echo $img; ?>');">
                                 <div class="card-content">
+                                    <small class="text-danger text-uppercase fw-bold"><?php echo htmlspecialchars($blog['szerzo_neve']); ?></small>
                                     <h5><?php echo htmlspecialchars($blog['cim']); ?></h5>
                                     <p class="text-muted"><?php echo htmlspecialchars($excerpt); ?></p>
-                                    <small class="text-muted"><?php echo date('Y. m. d.', strtotime($blog['iras_ideje'])); ?></small>
+                                    <small class="text-muted"><?php echo date('Y.m.d.', strtotime($blog['iras_ideje'])); ?></small>
                                 </div>
                             </div>
                         </a>
@@ -119,7 +120,7 @@
                             <div class="card bg-dark bg-opacity-50 h-100 p-4 border-0 border-top border-danger border-3 irasa-item-blog">
                                 <h5 class="card-title text-white"><?php echo htmlspecialchars($writing['szerzo_neve']); ?></h5>
                                 <p class="card-text text-secondary"><?php echo htmlspecialchars($excerpt); ?></p>
-                                <small class="text-secondary mt-auto"><?php echo date('Y. m. d.', strtotime($writing['iras_ideje'])); ?></small>
+                                <small class="text-secondary mt-auto"><?php echo date('Y.m.d.', strtotime($writing['iras_ideje'])); ?></small>
                             </div>
                         </a>
                     </div>
@@ -127,6 +128,42 @@
             </div>
         </div>
     </section>
+
+    <section id="videos" class="bg-black py-4">
+        <div class="container-lg">
+            <div class="red-dash mb-3">
+                <span>Videók</span>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                <video width="267" height="476" class="rounded-4 shadow-lg" controls muted>
+                    <source src="<?php echo BASE_URL; ?>assets/vaszilij.mp4" type="video/mp4">
+                    A böngésződ nem támogatja a videók lejátszását.
+                </video>
+                </div>
+                <div class="col-md-4">
+                <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2FVaszilijEdc%2Fvideos%2F519510439027738%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+      <section id="videos" class="bg-black py-4">
+        <div class="container-lg">
+            <div class="red-dash mb-3">
+                <span>Térkép</span>
+            </div>
+            <div class="row g-4">
+                <div class="col-12 map-embed">
+                    <iframe class="w-100 h-300 rounded-2"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2726.336621821591!2d19.6658577!3d46.8960978!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4743da7a6c479e1d%3A0xc8292b3f6dc69e7f!2sNeumann%20J%C3%A1nos%20Egyetem%20GAMF%20M%C5%B1szaki%20%C3%A9s%20Informatikai%20Kar!5e0!3m2!1shu!2shu!4v1772742560114!5m2!1shu!2shu"
+                            style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                </div>
+            </div>
+        </div>
+      </section>
 
     <!-- ── BARÁTAINK ──────────────────────────────────────────── -->
     <section id="friends" class="bg-black py-4">

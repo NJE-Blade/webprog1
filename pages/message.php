@@ -1,15 +1,13 @@
 <?php 
-    // Captcha generálás az űrlaphoz
+    //captcha
     $n1 = rand(1, 10);
     $n2 = rand(1, 10);
     $_SESSION['captcha_ans'] = $n1 + $n2;
 
-    // Session adatok kinyerése (Controller állítja be hiba vagy siker esetén)
     $msgHiba = $_SESSION['msg_error'] ?? '';
     $msgSiker = $_SESSION['msg_success'] ?? '';
     $old = $_SESSION['msg_post'] ?? [];
 
-    // Töröljük a session-t, hogy frissítéskor ne jelenjenek meg újra
     unset($_SESSION['msg_error'], $_SESSION['msg_success'], $_SESSION['msg_post']);
 ?>
 

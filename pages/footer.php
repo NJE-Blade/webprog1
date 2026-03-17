@@ -9,6 +9,9 @@
                         <i class="bi bi-facebook"></i>
                     </a>
                 </p>
+                <p class="mb-0">
+                    Egyetemi gyakorlati beadandó projekt. Egyes tartalmi elemeket megtöltő szöveges és képi anyagok forrása és jogtulajdonosa a <a target="_blank" href="https://vaszilijedc.hu">Vaszilij EDC</a> weboldal.
+                </p>
                 <div>
                     <a href="<?php echo BASE_URL; ?>pages/blades_intro.html"><img src="<?php echo BASE_URL; ?>/assets/blades_logo.svg" alt="teeth" width="36px"></a>
                     Blade | Web developement Team's demo

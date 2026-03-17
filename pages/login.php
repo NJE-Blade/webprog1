@@ -1,9 +1,7 @@
 <?php 
-    // Kezeljük a sikeres regisztráció üzenetét
     $successMsg = $_SESSION['login_msg'] ?? '';
     unset($_SESSION['login_msg']); 
 
-    // Kezeljük a bejelentkezési hibát (ha van a sessionben)
     $loginHiba = $_SESSION['login_error'] ?? '';
     unset($_SESSION['login_error']);
 ?>
